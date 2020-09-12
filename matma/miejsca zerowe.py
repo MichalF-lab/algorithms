@@ -10,6 +10,6 @@ elif (delta == 0):
     x = -b/(2*a)
     print (x)
 else:
-    x1 = (-b-math.sqrt(delta)/2*a)
-    x2 = (-b+math.sqrt(delta)/2*a)
+    x1 = ((-b-math.sqrt(delta))/2*a)
+    x2 = ((-b+math.sqrt(delta))/2*a)
     print (x1,x2)
