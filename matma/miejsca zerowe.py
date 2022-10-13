@@ -1,5 +1,6 @@
 import math
 
+print("może nie na temat ale truno")
 a = float(input('Podaj a: '))
 b = float(input('Podaj b: '))
 c = float(input('Podaj c: '))
