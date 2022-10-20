@@ -1,0 +1,7 @@
+zad 1a
+1764
+zad 2
+najmniejsza liczba pierwsza: 73
+najwieksza liczba pierwsza: 29881
+zad 3
+ilosc par: 0
