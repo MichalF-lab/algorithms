@@ -1,4 +1,4 @@
-#print('spk/22 \naaaa') #wyprintuje dosłwnie to co w nawiasie
+# print('spk/22 \naaaa') #python nie rozróznia typów cudzysłowi
 
 # if("Kot" < "pies"):
 #     print('jest wiekszy') # napierw są małe litery
@@ -11,7 +11,7 @@
 # a ="kot w butach"
 # print(a[::2] + "\n") #co druga litera - ktwbtc
 # print(a[:2:] + "\n") #do drugiej literki - ko
-# print(a[2::] + "\n") #od drugiej literki - t w butach
+# print(a[2::] + "\n") #od drugiej literki - t w butach+
 
 # b = int(ord("a")) # zamina a na int (f.ord)
 # print(b)
@@ -27,3 +27,7 @@
 # x = "oppieorraunndesk"
 # y = x[1:]
 # print(y[::2])
+
+
+# x = "zmienna"
+# print(x[::-1]) #daje od tyłu ten 
