@@ -1,5 +1,4 @@
 # ToDo list
-# 39-43 ogarnac zmienne globalne w funkcji lokalnej
 
 
 # s____ -> schemat zmiennej
@@ -36,11 +35,12 @@ def dodaj_autora(imie,nazwisko,rok_urodzenia):
 def dodaj_ksiazke(tytul,autor):
     ksiazka = [id_ksiazki,0,tytul,autor]
     ksiazki.append(ksiazka)
-    # inkrementacja_id_ksiazki()
+    inkrementacja_id_ksiazki()
 
 
- #def inkrementacja_id_ksiazki():
-    # id_ksiazki+=1
+def inkrementacja_id_ksiazki():
+    global id_ksiazki
+    id_ksiazki+=1
 
 dodaj_autora('Janek','Stachowiak',1998)
 
