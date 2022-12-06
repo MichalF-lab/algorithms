@@ -9,6 +9,6 @@ for i in range (15):
 def fib_wzór(n):
     return int(((math.sqrt(5)+1)/2)**n/math.sqrt(5) + 0.5)
 
-for i in range (73):
-    if(fib_wzór(i) == fibonaci(i)): print("zgadza_sie")
-    else: print("n")
+# for i in range (73):
+#     if(fib_wzór(i) == fibonaci(i)): print("zgadza_sie")
+#     else: print("n")
