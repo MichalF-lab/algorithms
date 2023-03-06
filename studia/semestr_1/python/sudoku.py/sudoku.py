@@ -517,6 +517,149 @@ def w_wariantach_czy_istnieje_pionowo(plansza,liczba,nr_rzedu):
             if (item == liczba): return True
     return False
 
+def usun_liczbe_z_wariantów(operacja,plansza,liczba,i,j,nie_usuwac):
+    if(operacja == 1):
+    # usun dana liczbe w pozostałych miejscach w kwadracie
+        if(i%3 == 0 and j%3 == 0):
+            # Jesli jest w górnej lewej kratce
+            for a in range(i,i+3): 
+                for b in range(j,j+3):
+                    if(plansza[a][b] is tuple and plansza[a][b] != nie_usuwac):
+                        try:
+                            temp = list(plansza[a][b])
+                            temp.remove(liczba)
+                            plansza[a][b] = tuple(temp)
+                        except BaseException:
+                            continue
+        if(i%3 == 1 and j%3 == 0):
+            # Jesli jest w środkowej lewej kratce
+            temp = 0
+            for a in range(i-1,i+2): 
+                for b in range(j,j+3):
+                    if(plansza[a][b] is tuple and plansza[a][b] != nie_usuwac):
+                        try:
+                            temp = list(plansza[a][b])
+                            temp.remove(liczba)
+                            plansza[a][b] = tuple(temp)
+                        except BaseException:
+                            continue
+        if(i%3 == 2 and j%3 == 0):
+        # Jesli jest w dolnej lewej kratce
+            temp = 0
+            for a in range(i-2,i+1): 
+                for b in range(j,j+3):
+                    if(plansza[a][b] is tuple and plansza[a][b] != nie_usuwac):
+                        try:
+                            temp = list(plansza[a][b])
+                            temp.remove(liczba)
+                            plansza[a][b] = tuple(temp)
+                        except BaseException:
+                            continue
+        if(i%3 == 0 and j%3 == 1):
+        # Jesli jest w górnej środkowej kratce
+            temp = 0
+            for a in range(i,i+3): 
+                for b in range(j-1,j+2):
+                    if(plansza[a][b] is tuple and plansza[a][b] != nie_usuwac):
+                        try:
+                            temp = list(plansza[a][b])
+                            temp.remove(liczba)
+                            plansza[a][b] = tuple(temp)
+                        except BaseException:
+                            continue
+        if(i%3 == 1 and j%3 == 1):
+        # Jesli jest na środku
+            temp = 0
+            for a in range(i-1,i+2): 
+                for b in range(j-1,j+2):
+                    if(plansza[a][b] is tuple and plansza[a][b] != nie_usuwac):
+                        try:
+                            temp = list(plansza[a][b])
+                            temp.remove(liczba)
+                            plansza[a][b] = tuple(temp)
+                        except BaseException:
+                            continue
+        if(i%3 == 2 and j%3 == 1):
+        # Jesli jest w donej środkowej kratce
+            temp = 0
+            for a in range(i-2,i+1): 
+                for b in range(j-1,j+2):
+                    if(plansza[a][b] is tuple and plansza[a][b] != nie_usuwac):
+                        try:
+                            temp = list(plansza[a][b])
+                            temp.remove(liczba)
+                            plansza[a][b] = tuple(temp)
+                        except BaseException:
+                            continue
+        if(i%3 == 0 and j%3 == 2):
+        # Jesli jest w górnej prawej kratce
+            temp = 0
+            for a in range(i,i+3): 
+                for b in range(j-2,j+1):
+                    if(plansza[a][b] is tuple and plansza[a][b] != nie_usuwac):
+                        try:
+                            temp = list(plansza[a][b])
+                            temp.remove(liczba)
+                            plansza[a][b] = tuple(temp)
+                        except BaseException:
+                            continue
+        if(i%3 == 1 and j%3 == 2):
+        # Jesli jest w środkowej prawej kratce
+            temp = 0
+            for a in range(i-1,i+2): 
+                for b in range(j-2,j+1):
+                    if(plansza[a][b] is tuple and plansza[a][b] != nie_usuwac):
+                        try:
+                            temp = list(plansza[a][b])
+                            temp.remove(liczba)
+                            plansza[a][b] = tuple(temp)
+                        except BaseException:
+                            continue
+        if(i%3 == 2 and j%3 == 2):
+        # Jesli jest w dolnej praw kratce
+            temp = 0
+            for a in range(i-2,i+1): 
+                for b in range(j-2,j+1):
+                    if(plansza[a][b] is tuple and plansza[a][b] != nie_usuwac):
+                        try:
+                            temp = list(plansza[a][b])
+                            temp.remove(liczba)
+                            plansza[a][b] = tuple(temp)
+                        except BaseException:
+                            continue
+    if(operacja == 2):
+    # usun liczbe w kolmnie i
+        if(w_wariantach_czy_istnieje_poziomo(plansza,liczba,i) == True):
+            for b in range(9):
+                if(plansza[i][b] is tuple):
+                        try:
+                            temp = list(plansza[i][b])
+                            temp.remove(liczba)
+                            plansza[i][b] = tuple(temp)
+                        except BaseException:
+                            continue
+
+    if(operacja == 3):
+     # usun liczbe w rzedzie j
+        if(w_wariantach_czy_istnieje_pionowo(plansza,liczba,j) == True):
+            for a in range(9):
+                if(plansza[i][b] is tuple):
+                        try:
+                            temp = list(plansza[i][b])
+                            temp.remove(liczba)
+                            plansza[i][b] = tuple(temp)
+                        except BaseException:
+                            continue
+    if(operacja == 4):
+    # usuń na konkretnym  miejscu
+        if(plansza[i][j] is tuple):
+            try:
+                temp = list(plansza[i][j])
+                temp.remove(liczba)
+                plansza[i][b] = tuple(temp)
+            except BaseException:
+                return 0
+
 
 #--------------------------------------------------------------------------------------
 # Możliwe warianty
@@ -738,69 +881,535 @@ def jedyne_pole_poziomo_lub_pionowo(plansza):
                         if(w_wariantach_czy_istnieje_poziomo(plansza,item,j) and w_wariantach_czy_istnieje_pionowo(plansza,item,i)):
                             plansza[i][j] = item
                             break
+                        # Trzeba to przejzec TODO
 
 def oczywite_dwójki_trójki(plansza):
     for i in range(9):
         # Dla każdego miejsca w rzedzie
         for j in range(9):
             # Sprawdzamy po kolmnach
-            dana_para = plansza[i][j]
-            if(i%3 == 0 and j%3 == 0):
-            # Jesli jest w górnej lewej kratce
-                temp = 0
-                for a in range(i,i+3): 
-                    for b in range(j,j+3):
-                        if(plansza[a][b] == dana_para): temp+=1
-                if(temp == 2):
-                    for item
+            if(plansza[i][j] is tuple):
+                dana_para = plansza[i][j]
+                if(i%3 == 0 and j%3 == 0):
+                # Jesli jest w górnej lewej kratce
+                    temp = 0 # ilosc takich samych krotek
+                    wystapienia_w_kwadracie = [range(10)]
+                    for a in range(i,i+3): 
+                        for b in range(j,j+3):
+                            if(plansza[a][b] == dana_para): temp+= 1
+                            for item in plansza[a][b]:
+                                wystapienia_w_kwadracie[item] += 1
+                    #-------------------------------------------------------------
+                    # Pary z takimi samymi liczbami
+                    if (temp == 2 and len(dana_para[i][j]) == 2):
+                        # sa 2 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 3 and len(dana_para[i][j]) == 3):
+                        # sa 3 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 4 and len(dana_para[i][j]) == 4):
+                        # sa 4 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 5 and len(dana_para[i][j]) == 5):
+                        # jest 5 takich miejsc w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    #-------------------------------------------------------------
+                    # Pary nie talkie same
+                    # oczywiste trojki
+                    podejrzane_liczby = []
+                    for liczba in range(10):
+                        if(wystapienia_w_kwadracie[liczba]>=3): podejrzane_liczby.append(liczba)
+                    # sprawdzamy ktore liczby wystepuja przynajmniej 3 razy w kratce
+                    temp_3 = [] #ilosc komórek git jak jest 3
+                    for a in range(i,i+3): 
+                        for b in range(j,j+3):
+                            if(len(plansza[a][b]) == 2 and plansza[a][b][1] in podejrzane_liczby and plansza[a][b][2] in podejrzane_liczby): temp_3.append((a,b))
+                    if(len(temp_3) == 3):
+                    # Jeżeli znaleźliśmy takie 3 komorki co maja po 2 liczby i one wystepuja po 2 razy
+                        sprawdzenie = () # TODO czy napewnpo
+                        for item in temp_3:
+                            for d_item in item:
+                                sprawdzenie += plansza[item[0]][item[1]][d_item] 
+                        for item in sprawdzenie:
+                            if(sprawdzenie.count(item) != 2):
+                            # Jeżli jakiś elemnet nie wystepuje 2 razy
+                                return
+                        # znalezienie tych liczb w innych komorkach
+                        sprawdzenie = set(sprawdzenie)
+                        # zbiór liczb
+                        for item in sprawdzenie:
+                            for a in range(i,i+3): 
+                                for b in range(j,j+3):
+                                    if((a,b) in temp_3):continue
+                                    usun_liczbe_z_wariantów(4,plansza,item,a,b)
+                
 
-            if(i%3 == 1 and j%3 == 0):
-                # Jesli jest w środkowej lewej kratce
-                temp = 0
-                for a in range(i-1,i+2): 
-                    for b in range(j,j+3):
+                if(i%3 == 1 and j%3 == 0):
+                    # Jesli jest w środkowej lewej kratce
+                    temp = 0 # ilosc takich samych krotek
+                    wystapienia_w_kwadracie = [range(10)]
+                    for a in range(i-1,i+2): 
+                        for b in range(j,j+3):
+                            if(plansza[a][b] == dana_para): temp+= 1
+                            for item in plansza[a][b]:
+                                wystapienia_w_kwadracie[item] += 1
+                    #-------------------------------------------------------------
+                    # Pary z takimi samymi liczbami
+                    if (temp == 2 and len(dana_para[i][j]) == 2):
+                        # sa 2 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 3 and len(dana_para[i][j]) == 3):
+                        # sa 3 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 4 and len(dana_para[i][j]) == 4):
+                        # sa 4 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 5 and len(dana_para[i][j]) == 5):
+                        # jest 5 takich miejsc w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    #-------------------------------------------------------------
+                    # Pary nie talkie same
+                    # oczywiste trojki
+                    podejrzane_liczby = []
+                    for liczba in range(10):
+                        if(wystapienia_w_kwadracie[liczba]>=3): podejrzane_liczby.append(liczba)
+                    # sprawdzamy ktore liczby wystepuja przynajmniej 3 razy w kratce
+                    temp_3 = [] #ilosc komórek git jak jest 3
+                    for a in range(i-1,i+2): 
+                        for b in range(j,j+3):
+                            if(len(plansza[a][b]) == 2 and plansza[a][b][1] in podejrzane_liczby and plansza[a][b][2] in podejrzane_liczby): temp_3.append((a,b))
+                    if(len(temp_3) == 3):
+                    # Jeżeli znaleźliśmy takie 3 komorki co maja po 2 liczby i one wystepuja po 2 razy
+                        sprawdzenie = () # TODO czy napewnpo
+                        for item in temp_3:
+                            for d_item in item:
+                                sprawdzenie += plansza[item[0]][item[1]][d_item] 
+                        for item in sprawdzenie:
+                            if(sprawdzenie.count(item) != 2):
+                            # Jeżli jakiś elemnet nie wystepuje 2 razy
+                                return
+                        # znalezienie tych liczb w innych komorkach
+                        sprawdzenie = set(sprawdzenie)
+                        # zbiór liczb
+                        for item in sprawdzenie:
+                            for a in range(i-1,i+2): 
+                                for b in range(j,j+3):
+                                    if((a,b) in temp_3):continue
+                                    usun_liczbe_z_wariantów(4,plansza,item,a,b)
+                    
+                if(i%3 == 2 and j%3 == 0):
+                # Jesli jest w dolnej lewej kratce
+                    temp = 0 # ilosc takich samych krotek
+                    wystapienia_w_kwadracie = [range(10)]
+                    for a in range(i-2,i+1): 
+                        for b in range(j,j+3):
+                            if(plansza[a][b] == dana_para): temp+= 1
+                            for item in plansza[a][b]:
+                                wystapienia_w_kwadracie[item] += 1
+                    #-------------------------------------------------------------
+                    # Pary z takimi samymi liczbami
+                    if (temp == 2 and len(dana_para[i][j]) == 2):
+                        # sa 2 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 3 and len(dana_para[i][j]) == 3):
+                        # sa 3 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 4 and len(dana_para[i][j]) == 4):
+                        # sa 4 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 5 and len(dana_para[i][j]) == 5):
+                        # jest 5 takich miejsc w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    #-------------------------------------------------------------
+                    # Pary nie talkie same
+                    # oczywiste trojki
+                    podejrzane_liczby = []
+                    for liczba in range(10):
+                        if(wystapienia_w_kwadracie[liczba]>=3): podejrzane_liczby.append(liczba)
+                    # sprawdzamy ktore liczby wystepuja przynajmniej 3 razy w kratce
+                    temp_3 = [] #ilosc komórek git jak jest 3
+                    for a in range(i-2,i+1): 
+                        for b in range(j,j+3):
+                            if(len(plansza[a][b]) == 2 and plansza[a][b][1] in podejrzane_liczby and plansza[a][b][2] in podejrzane_liczby): temp_3.append((a,b))
+                    if(len(temp_3) == 3):
+                    # Jeżeli znaleźliśmy takie 3 komorki co maja po 2 liczby i one wystepuja po 2 razy
+                        sprawdzenie = () # TODO czy napewnpo
+                        for item in temp_3:
+                            for d_item in item:
+                                sprawdzenie += plansza[item[0]][item[1]][d_item] 
+                        for item in sprawdzenie:
+                            if(sprawdzenie.count(item) != 2):
+                            # Jeżli jakiś elemnet nie wystepuje 2 razy
+                                return
+                        # znalezienie tych liczb w innych komorkach
+                        sprawdzenie = set(sprawdzenie)
+                        # zbiór liczb
+                        for item in sprawdzenie:
+                            for a in range(i-2,i+1): 
+                                for b in range(j,j+3):
+                                    if((a,b) in temp_3):continue
+                                    usun_liczbe_z_wariantów(4,plansza,item,a,b)
 
-            if(i%3 == 2 and j%3 == 0):
-            # Jesli jest w dolnej lewej kratce
-                temp = 0
-                for a in range(i-2,i+1): 
-                    for b in range(j,j+3):
 
-            if(i%3 == 0 and j%3 == 1):
-            # Jesli jest w górnej środkowej kratce
-                temp = 0
-                for a in range(i,i+3): 
-                    for b in range(j-1,j+2):
+                if(i%3 == 0 and j%3 == 1):
+                # Jesli jest w górnej środkowej kratce
+                    temp = 0 # ilosc takich samych krotek
+                    wystapienia_w_kwadracie = [range(10)]
+                    for a in range(i,i+3): 
+                        for b in range(j-1,j+2):
+                            if(plansza[a][b] == dana_para): temp+= 1
+                            for item in plansza[a][b]:
+                                wystapienia_w_kwadracie[item] += 1
+                    #-------------------------------------------------------------
+                    # Pary z takimi samymi liczbami
+                    if (temp == 2 and len(dana_para[i][j]) == 2):
+                        # sa 2 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 3 and len(dana_para[i][j]) == 3):
+                        # sa 3 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 4 and len(dana_para[i][j]) == 4):
+                        # sa 4 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 5 and len(dana_para[i][j]) == 5):
+                        # jest 5 takich miejsc w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    #-------------------------------------------------------------
+                    # Pary nie talkie same
+                    # oczywiste trojki
+                    podejrzane_liczby = []
+                    for liczba in range(10):
+                        if(wystapienia_w_kwadracie[liczba]>=3): podejrzane_liczby.append(liczba)
+                    # sprawdzamy ktore liczby wystepuja przynajmniej 3 razy w kratce
+                    temp_3 = [] #ilosc komórek git jak jest 3
+                    for a in range(i,i+3): 
+                        for b in range(j-1,j+2):
+                            if(len(plansza[a][b]) == 2 and plansza[a][b][1] in podejrzane_liczby and plansza[a][b][2] in podejrzane_liczby): temp_3.append((a,b))
+                    if(len(temp_3) == 3):
+                    # Jeżeli znaleźliśmy takie 3 komorki co maja po 2 liczby i one wystepuja po 2 razy
+                        sprawdzenie = () # TODO czy napewnpo
+                        for item in temp_3:
+                            for d_item in item:
+                                sprawdzenie += plansza[item[0]][item[1]][d_item] 
+                        for item in sprawdzenie:
+                            if(sprawdzenie.count(item) != 2):
+                            # Jeżli jakiś elemnet nie wystepuje 2 razy
+                                return
+                        # znalezienie tych liczb w innych komorkach
+                        sprawdzenie = set(sprawdzenie)
+                        # zbiór liczb
+                        for item in sprawdzenie:
+                            for a in range(i,i+3): 
+                                for b in range(j-1,j+2):
+                                    if((a,b) in temp_3):continue
+                                    usun_liczbe_z_wariantów(4,plansza,item,a,b)
+                    
 
-            if(i%3 == 1 and j%3 == 1):
-            # Jesli jest na środku
-                temp = 0
-                for a in range(i-1,i+2): 
-                    for b in range(j-1,j+2):
+                if(i%3 == 1 and j%3 == 1):
+                # Jesli jest na środku
+                    temp = 0 # ilosc takich samych krotek
+                    wystapienia_w_kwadracie = [range(10)]
+                    for a in range(i-1,i+2): 
+                        for b in range(j-1,j+2):
+                            if(plansza[a][b] == dana_para): temp+= 1
+                            for item in plansza[a][b]:
+                                wystapienia_w_kwadracie[item] += 1
+                    #-------------------------------------------------------------
+                    # Pary z takimi samymi liczbami
+                    if (temp == 2 and len(dana_para[i][j]) == 2):
+                        # sa 2 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 3 and len(dana_para[i][j]) == 3):
+                        # sa 3 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 4 and len(dana_para[i][j]) == 4):
+                        # sa 4 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 5 and len(dana_para[i][j]) == 5):
+                        # jest 5 takich miejsc w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    #-------------------------------------------------------------
+                    # Pary nie talkie same
+                    # oczywiste trojki
+                    podejrzane_liczby = []
+                    for liczba in range(10):
+                        if(wystapienia_w_kwadracie[liczba]>=3): podejrzane_liczby.append(liczba)
+                    # sprawdzamy ktore liczby wystepuja przynajmniej 3 razy w kratce
+                    temp_3 = [] #ilosc komórek git jak jest 3
+                    for a in range(i-1,i+2): 
+                        for b in range(j-1,j+2):
+                            if(len(plansza[a][b]) == 2 and plansza[a][b][1] in podejrzane_liczby and plansza[a][b][2] in podejrzane_liczby): temp_3.append((a,b))
+                    if(len(temp_3) == 3):
+                    # Jeżeli znaleźliśmy takie 3 komorki co maja po 2 liczby i one wystepuja po 2 razy
+                        sprawdzenie = () # TODO czy napewnpo
+                        for item in temp_3:
+                            for d_item in item:
+                                sprawdzenie += plansza[item[0]][item[1]][d_item] 
+                        for item in sprawdzenie:
+                            if(sprawdzenie.count(item) != 2):
+                            # Jeżli jakiś elemnet nie wystepuje 2 razy
+                                return
+                        # znalezienie tych liczb w innych komorkach
+                        sprawdzenie = set(sprawdzenie)
+                        # zbiór liczb
+                        for item in sprawdzenie:
+                            for a in range(i-1,i+2): 
+                                for b in range(j-1,j+2):
+                                    if((a,b) in temp_3):continue
+                                    usun_liczbe_z_wariantów(4,plansza,item,a,b)
+                    
 
-            if(i%3 == 2 and j%3 == 1):
-            # Jesli jest w donej środkowej kratce
-                temp = 0
-                for a in range(i-2,i+1): 
-                    for b in range(j-1,j+2):
+                if(i%3 == 2 and j%3 == 1):
+                # Jesli jest w donej środkowej kratce
+                    temp = 0 # ilosc takich samych krotek
+                    wystapienia_w_kwadracie = [range(10)]
+                    for a in range(i-2,i+1): 
+                        for b in range(j-1,j+2):
+                            if(plansza[a][b] == dana_para): temp+= 1
+                            for item in plansza[a][b]:
+                                wystapienia_w_kwadracie[item] += 1
+                    #-------------------------------------------------------------
+                    # Pary z takimi samymi liczbami
+                    if (temp == 2 and len(dana_para[i][j]) == 2):
+                        # sa 2 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 3 and len(dana_para[i][j]) == 3):
+                        # sa 3 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 4 and len(dana_para[i][j]) == 4):
+                        # sa 4 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 5 and len(dana_para[i][j]) == 5):
+                        # jest 5 takich miejsc w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    #-------------------------------------------------------------
+                    # Pary nie talkie same
+                    # oczywiste trojki
+                    podejrzane_liczby = []
+                    for liczba in range(10):
+                        if(wystapienia_w_kwadracie[liczba]>=3): podejrzane_liczby.append(liczba)
+                    # sprawdzamy ktore liczby wystepuja przynajmniej 3 razy w kratce
+                    temp_3 = [] #ilosc komórek git jak jest 3
+                    for a in range(i-2,i+1): 
+                        for b in range(j-1,j+2):
+                            if(len(plansza[a][b]) == 2 and plansza[a][b][1] in podejrzane_liczby and plansza[a][b][2] in podejrzane_liczby): temp_3.append((a,b))
+                    if(len(temp_3) == 3):
+                    # Jeżeli znaleźliśmy takie 3 komorki co maja po 2 liczby i one wystepuja po 2 razy
+                        sprawdzenie = () # TODO czy napewnpo
+                        for item in temp_3:
+                            for d_item in item:
+                                sprawdzenie += plansza[item[0]][item[1]][d_item] 
+                        for item in sprawdzenie:
+                            if(sprawdzenie.count(item) != 2):
+                            # Jeżli jakiś elemnet nie wystepuje 2 razy
+                                return
+                        # znalezienie tych liczb w innych komorkach
+                        sprawdzenie = set(sprawdzenie)
+                        # zbiór liczb
+                        for item in sprawdzenie:
+                            for a in range(i-2,i+1): 
+                                for b in range(j-1,j+2):    
+                                    if((a,b) in temp_3):continue
+                                    usun_liczbe_z_wariantów(4,plansza,item,a,b)
+                    
 
-            if(i%3 == 0 and j%3 == 2):
-            # Jesli jest w górnej prawej kratce
-                temp = 0
-                for a in range(i,i+3): 
-                    for b in range(j-2,j+1):
+                if(i%3 == 0 and j%3 == 2):
+                # Jesli jest w górnej prawej kratce
+                    temp = 0 # ilosc takich samych krotek
+                    wystapienia_w_kwadracie = [range(10)]
+                    for a in range(i,i+3): 
+                        for b in range(j-2,j+1):
+                            if(plansza[a][b] == dana_para): temp+= 1
+                            for item in plansza[a][b]:
+                                wystapienia_w_kwadracie[item] += 1
+                    #-------------------------------------------------------------
+                    # Pary z takimi samymi liczbami
+                    if (temp == 2 and len(dana_para[i][j]) == 2):
+                        # sa 2 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 3 and len(dana_para[i][j]) == 3):
+                        # sa 3 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 4 and len(dana_para[i][j]) == 4):
+                        # sa 4 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 5 and len(dana_para[i][j]) == 5):
+                        # jest 5 takich miejsc w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    #-------------------------------------------------------------
+                    # Pary nie talkie same
+                    # oczywiste trojki
+                    podejrzane_liczby = []
+                    for liczba in range(10):
+                        if(wystapienia_w_kwadracie[liczba]>=3): podejrzane_liczby.append(liczba)
+                    # sprawdzamy ktore liczby wystepuja przynajmniej 3 razy w kratce
+                    temp_3 = [] #ilosc komórek git jak jest 3
+                    for a in range(i,i+3): 
+                        for b in range(j-2,j+1):
+                            if(len(plansza[a][b]) == 2 and plansza[a][b][1] in podejrzane_liczby and plansza[a][b][2] in podejrzane_liczby): temp_3.append((a,b))
+                    if(len(temp_3) == 3):
+                    # Jeżeli znaleźliśmy takie 3 komorki co maja po 2 liczby i one wystepuja po 2 razy
+                        sprawdzenie = () # TODO czy napewnpo
+                        for item in temp_3:
+                            for d_item in item:
+                                sprawdzenie += plansza[item[0]][item[1]][d_item] 
+                        for item in sprawdzenie:
+                            if(sprawdzenie.count(item) != 2):
+                            # Jeżli jakiś elemnet nie wystepuje 2 razy
+                                return
+                        # znalezienie tych liczb w innych komorkach
+                        sprawdzenie = set(sprawdzenie)
+                        # zbiór liczb
+                        for item in sprawdzenie:
+                            for a in range(i,i+3): 
+                                for b in range(j-2,j+1):
+                                    if((a,b) in temp_3):continue
+                                    usun_liczbe_z_wariantów(4,plansza,item,a,b)
+                    
 
-            if(i%3 == 1 and j%3 == 2):
-            # Jesli jest w środkowej prawej kratce
-                temp = 0
-                for a in range(i-1,i+2): 
-                    for b in range(j-2,j+1):
+                if(i%3 == 1 and j%3 == 2):
+                # Jesli jest w środkowej prawej kratce
+                    temp = 0 # ilosc takich samych krotek
+                    wystapienia_w_kwadracie = [range(10)]
+                    for a in range(i-1,i+2): 
+                        for b in range(j-2,j+1):
+                            if(plansza[a][b] == dana_para): temp+= 1
+                            for item in plansza[a][b]:
+                                wystapienia_w_kwadracie[item] += 1
+                    #-------------------------------------------------------------
+                    # Pary z takimi samymi liczbami
+                    if (temp == 2 and len(dana_para[i][j]) == 2):
+                        # sa 2 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 3 and len(dana_para[i][j]) == 3):
+                        # sa 3 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 4 and len(dana_para[i][j]) == 4):
+                        # sa 4 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 5 and len(dana_para[i][j]) == 5):
+                        # jest 5 takich miejsc w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    #-------------------------------------------------------------
+                    # Pary nie talkie same
+                    # oczywiste trojki
+                    podejrzane_liczby = []
+                    for liczba in range(10):
+                        if(wystapienia_w_kwadracie[liczba]>=3): podejrzane_liczby.append(liczba)
+                    # sprawdzamy ktore liczby wystepuja przynajmniej 3 razy w kratce
+                    temp_3 = [] #ilosc komórek git jak jest 3
+                    for a in range(i-1,i+2): 
+                        for b in range(j-2,j+1):
+                            if(len(plansza[a][b]) == 2 and plansza[a][b][1] in podejrzane_liczby and plansza[a][b][2] in podejrzane_liczby): temp_3.append((a,b))
+                    if(len(temp_3) == 3):
+                    # Jeżeli znaleźliśmy takie 3 komorki co maja po 2 liczby i one wystepuja po 2 razy
+                        sprawdzenie = () # TODO czy napewnpo
+                        for item in temp_3:
+                            for d_item in item:
+                                sprawdzenie += plansza[item[0]][item[1]][d_item] 
+                        for item in sprawdzenie:
+                            if(sprawdzenie.count(item) != 2):
+                            # Jeżli jakiś elemnet nie wystepuje 2 razy
+                                return
+                        # znalezienie tych liczb w innych komorkach
+                        sprawdzenie = set(sprawdzenie)
+                        # zbiór liczb
+                        for item in sprawdzenie:
+                            for a in range(i-1,i+2): 
+                                for b in range(j-2,j+1):
+                                    if((a,b) in temp_3):continue
+                                    usun_liczbe_z_wariantów(4,plansza,item,a,b)
+                    
 
-            if(i%3 == 2 and j%3 == 2):
-            # Jesli jest w dolnej praw kratce
-                temp = 0
-                for a in range(i-2,i+1): 
-                    for b in range(j-2,j+1):
+                if(i%3 == 2 and j%3 == 2):
+                # Jesli jest w dolnej praw kratce
+                    temp = 0 # ilosc takich samych krotek
+                    wystapienia_w_kwadracie = [range(10)]
+                    for a in range(i-2,i+1): 
+                        for b in range(j-2,j+1):
+                            if(plansza[a][b] == dana_para): temp+= 1
+                            for item in plansza[a][b]:
+                                wystapienia_w_kwadracie[item] += 1
+                    #-------------------------------------------------------------
+                    # Pary z takimi samymi liczbami
+                    if (temp == 2 and len(dana_para[i][j]) == 2):
+                        # sa 2 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 3 and len(dana_para[i][j]) == 3):
+                        # sa 3 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 4 and len(dana_para[i][j]) == 4):
+                        # sa 4 miejsca takie same w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    if (temp == 5 and len(dana_para[i][j]) == 5):
+                        # jest 5 takich miejsc w kratce
+                        for item in dana_para:
+                            usun_liczbe_z_wariantów(1,plansza,item,i,j,dana_para)
+                    #-------------------------------------------------------------
+                    # Pary nie talkie same
+                    # oczywiste trojki
+                    podejrzane_liczby = []
+                    for liczba in range(10):
+                        if(wystapienia_w_kwadracie[liczba]>=3): podejrzane_liczby.append(liczba)
+                    # sprawdzamy ktore liczby wystepuja przynajmniej 3 razy w kratce
+                    temp_3 = [] #ilosc komórek git jak jest 3
+                    for a in range(i-2,i+1): 
+                        for b in range(j-2,j+1):
+                            if(len(plansza[a][b]) == 2 and plansza[a][b][1] in podejrzane_liczby and plansza[a][b][2] in podejrzane_liczby): temp_3.append((a,b))
+                    if(len(temp_3) == 3):
+                    # Jeżeli znaleźliśmy takie 3 komorki co maja po 2 liczby i one wystepuja po 2 razy
+                        sprawdzenie = () # TODO czy napewnpo
+                        for item in temp_3:
+                            for d_item in item:
+                                sprawdzenie += plansza[item[0]][item[1]][d_item] 
+                        for item in sprawdzenie:
+                            if(sprawdzenie.count(item) != 2):
+                            # Jeżli jakiś elemnet nie wystepuje 2 razy
+                                return
+                        # znalezienie tych liczb w innych komorkach
+                        sprawdzenie = set(sprawdzenie)
+                        # zbiór liczb
+                        for item in sprawdzenie:
+                            for a in range(i-2,i+1): 
+                                for b in range(j-2,j+1):
+                                    if((a,b) in temp_3):continue
+                                    usun_liczbe_z_wariantów(4,plansza,item,a,b)
+                    
 
 
 
