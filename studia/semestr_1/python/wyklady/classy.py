@@ -29,3 +29,46 @@ c = jakas2.anonim()
 print(c.atrybut)
 d = jakas2(10)
 print(d.atrybut)
+
+
+# class ccc:
+
+#     def promien(self):
+#         pass
+#     @promien.setter
+#     def promien(self,r):
+#         pass
+
+# obiekt = ccc()
+# obiekt.promien = 10
+
+# class A:
+#     @classmethod
+#     def nazwa():
+#         print("Hello World")
+
+# A.nazwa()
+# a = A()
+
+# class A:
+#     def __init__(self, x):
+#         self.x = 2*x
+
+#     @property
+#     def x(self):
+#         return self._x
+
+#     @x.setter
+#     def x(self, x):
+#         self._x = 3*x
+
+# a = A(10)
+# print(a.x)
+
+class A:
+    def __init__(self):
+        self.x = 42
+
+a = A()
+a.x = 7
+print(A.x)
