@@ -1,32 +1,3 @@
-
-# # # import numpy as np
-
-# def f(x):
-#     return x**2
-
-# def Romberg(f, start, end, sample):
-#     #T = 0
-#     T = [[0]*(sample) for _ in range(sample)]
-#     distans = (end-start)
-#     for i in range(0, sample):
-#         pom_2_do_i = 2**i
-#         jump = distans/(pom_2_do_i)
-#         for z in range(pom_2_do_i):
-#             T[i][0] += (jump*1/2 * (f(start+((z)*jump)) + 
-#                              f(start+((z+1)*jump))))
-#             # obliczamy T[i] jako metoda prostokątów dla danego przedziału
-#         # for m in range(i, 1,-1):
-#         #     temp1 = T[i-1][m-1]
-#         #     temp2 = T[i][m-1]
-#         #     T[i][m] =((4**i * temp1) - temp2)/(4**(i) - 1)
-#             #print("_",temp1," ",temp2)
-#             #print(T[i])
-    
-#     return (T[sample-1][0])
-
-# print(Romberg(f, 0, 1, 6))
-
-# # import numpy as np
 import math
 
 def f1(x):
@@ -89,3 +60,21 @@ def fpcos(x):
     return math.cos(x)
 
 print(pole_pomiedzy_funkcjami(fpcos,fmcos,sample=1/36,start=-1,end=1))
+
+
+def pochodna(f,x,sample=1/1000):
+    start = f(x)
+    end = f(x+sample)
+    slope = (end-start)/sample
+    return slope
+
+print(pochodna(fmcos,8))
+
+def dlugosc_luku(f,start = -10, end = 0-10):
+    try:
+        length = calka_prostokatami(math.sqrt(1+pochodna(f)**2))
+        return length
+    except BaseException:
+        print("nie da sie policzyc")
+
+print(dlugosc_luku(fmcos))
