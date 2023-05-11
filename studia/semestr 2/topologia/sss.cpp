@@ -1,4 +1,3 @@
-```
 #include <iostream>
 
 using namespace std;
@@ -114,4 +113,3 @@ switch(wybor_zadania){
 
 return 0;
 }
-```
