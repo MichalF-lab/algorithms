@@ -8,4 +8,4 @@ def NWD(a = 1, b = 1):
             b-=a
     return a
 
-# print(NWD(50,24))
+# print(NWD(50,75))

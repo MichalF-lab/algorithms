@@ -1,55 +1,6 @@
-class MD4():
-    # konstruktor domyślny
-    def __init__(self,x: bytes):
-        self.x = x
-    
-    def from_string(self,x: str):
-        self.x = x.decode()
-        #konstruktor
-    def from_file(self,x):
-        # open(operacja binarna) read zamiast redaline i uzyc konstruktora Metoda klasy
-        file = open(x)
-        f = ""
-        for line in file:
-            f.append(file.readline())
-        self.x = f
-        
-
-    def get_hash() -> float:
-        #TODO
-        hash_ = 0
-        return hash_
-
-    def __str__(self) -> str:
-        return hex(self.x)#get hash (bie selfx)
-
-#---------------------------------------------------------------
-import hashlib
-
-text = 'Hello'
-hashObject = hashlib.new('md4', text.encode('utf-8'))
-digest = hashObject.hexdigest()
-
-print(digest)
-#--------------------------------------------------------------
-#def get_hash(x):
-A = 0x67452301
-B = 0xefcdab89 
-C = 0x98badcfe 
-D = 0x10325476 
-
-def F(x, y, z):
-    return (x & y) | ((~x) & z)
-
-def G(x, y, z):
-    return (x & y) | (y & z) | (x & z)
-
-def H(x, y, z):
-    return x ^ y ^ z
-
-
+import struct
 # Stałe rundy
-szereg_stalych = [
+round_constants = [
     # Runda 1
     (0, "F", 0, 3),
     (1, "F", 0, 7),
@@ -105,10 +56,20 @@ szereg_stalych = [
     (47, "H", 1859775393, 15)
 ]
 
+# Funkcje pomocnicze
+def F(x, y, z):
+    return (x & y) | ((~x) & z)
 
+def G(x, y, z):
+    return (x & y) | (x & z) | (y & z)
+
+def H(x, y, z):
+    return x ^ y ^ z
+
+# Funkcja kompresji MD4
 def MD4Compression(A, B, C, D, M):
-    for i in range(len(szereg_stalych)):
-
+    for i in range(len(round_constants)):
+        idx, f, y, w = round_constants[i]
         if f == "F":
             temp = F(B, C, D)
         elif f == "G":
@@ -116,17 +77,34 @@ def MD4Compression(A, B, C, D, M):
         elif f == "H":
             temp = H(B, C, D)
 
-        idx, f, y, w = szereg_stalych[i]
-        X = M[idx]
-        
-        temp = (A + temp + X + y) & 0xFFFFFFFF
+        temp = (A + temp + M[idx] + y) & 0xFFFFFFFF
         temp = temp << w | temp >> (32 - w)
 
         A, B, C, D = D, temp, B, C
 
     return (A & 0xFFFFFFFF, B & 0xFFFFFFFF, C & 0xFFFFFFFF, D & 0xFFFFFFFF)
 
-message = "Ala ma kota"
+# Funkcja pomocnicza do konwersji wiadomości na listę 32-bitowych słów
+def process_message(message):
+    message = bytearray(message)
+    length = (8 * len(message)) & 0xFFFFFFFFFFFFFFFF
+    message.append(0x80)
+    while len(message) % 64 != 56:
+        message.append(0x00)
+    message += struct.pack("<Q", length)
+    return struct.unpack("<" + "I" * (len(message) // 4), message)
 
-result = MD4Compression(A, B, C, D, message)
-print(result)
+# Funkcja haszująca MD4
+def MD4Hash(message):
+    A = 0x67452301
+    B = 0xEFCDAB89
+    C = 0x98BADCFE
+    D = 0x10325476
+
+    M = process_message(message)
+    return MD4Compression(A, B, C, D, M)
+
+# Przykładowe użycie
+message = "Hello, world!"
+hash_value = MD4Hash(message.encode())
+print(hash_value)

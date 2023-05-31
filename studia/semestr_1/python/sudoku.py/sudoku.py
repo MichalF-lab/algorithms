@@ -1506,7 +1506,7 @@ def oczywite_dwojki_trojki(plansza):
                                         usun_liczbe_z_wariantów(4,plansza,item,a,b)
                     #if(temp != 1): print(temp)
                 except BaseException:
-                    print("nie")
+                    #print("nie")
                     continue
 #-----------------------------------------------------------------------
 # Funckcja main 
@@ -1547,7 +1547,7 @@ def rozwiazyanie(plansza):
 
 # Niestety nie działa dla wszystkich plansz
 plansza_1 = stwórz_plansze()
-plansza_1 = uzupelni_plansze_z_pliku(lokalizcja,plansza_1,33)
+plansza_1 = uzupelni_plansze_z_pliku(lokalizcja,plansza_1,6)
 print(plansza_1)
 print("Tu rozwiazanie")
 print(rozwiazyanie(plansza_1))
