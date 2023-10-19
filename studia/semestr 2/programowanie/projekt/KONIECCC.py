@@ -7,14 +7,13 @@ class MD4():
     def __init__(self, x: bytes):
         self.x = x
         x += b"\x80"
-        x += b"\x00" * (-(len(self.x) + 8) % 64)
+        x += b"\x00" * (-(len(x) + 8) % 64)
         x += struct.pack("<Q", len(self.x) * 8)
-        all_bytes = x
-        self.get_hash([all_bytes[i : i + 64] for i in range(0, len(all_bytes), 64)])
+        self.hash = self.get_hash([x[i : i + 64] for i in range(0, len(x), 64)])
     
     @classmethod
     def from_string(cls, x: str):
-        return cls(x)
+        return cls(x.encode())
 
     @classmethod
     def from_file(cls, x):
@@ -23,7 +22,7 @@ class MD4():
         return cls(file_content)
         
     @classmethod
-    def get_hash(cls, fragments) -> List[int]:
+    def get_hash(cls, fragment) -> List[int]:
         const_values = [
             ("F", 0x00000000, 0, 0x03), ("F", 0x00000000, 1, 0x07), ("F", 0x00000000, 2, 0x0B), ("F", 0x00000000, 3, 0x13),
             ("F", 0x00000000, 4, 0x03), ("F", 0x00000000, 5, 0x07), ("F", 0x00000000, 6, 0x0B), ("F", 0x00000000, 7, 0x13),
@@ -38,41 +37,42 @@ class MD4():
             ("H", 0x6ED9EBA1, 1, 0x03), ("H", 0x6ED9EBA1, 9, 0x09), ("H", 0x6ED9EBA1, 5, 0x0B), ("H", 0x6ED9EBA1, 13, 0x0F),
             ("H", 0x6ED9EBA1, 3, 0x03), ("H", 0x6ED9EBA1, 11, 0x09), ("H", 0x6ED9EBA1, 7, 0x0B), ("H", 0x6ED9EBA1, 15, 0x0F)
         ]
-        for part in fragments:
-            if len(part) < 64:
-                part += b"\x00" * (64 - len(part))
+        for part in fragment:
             X = list(struct.unpack("<16I", part))
-            print(X)
             a, b, c, d = cls.start_table
 
             for i in range(48):
                 if const_values[i][0] == "F":
                     f = lambda x, y, z: (x & y) | (~x & z)
                 elif const_values[i][0] == "G":
-                    f = lambda x, y, z: (x & y) | (x & z) | (y & z)
+                    f = lambda x, y, z: ((x & y) | (y & z) | (x & z))
                 else:
-                    f = lambda x, y, z: x ^ y ^ z
+                    f = lambda x, y, z: (x ^ y ^ z)
 
+                a_temp = a
+                b_temp = b
+                c_temp = c
                 d_temp = d
-                b = cls.left_rotate((a + f(b, c, d) + X[const_values[i][2]] + const_values[i][1]) % (2 ** 32), const_values[i][3])
                 a = d_temp
-                d = c
-                c = b
-
-            hash_ = []
-            hash_.append((a) % (2 ** 32))
-            hash_.append((b) % (2 ** 32))
-            hash_.append((c) % (2 ** 32))
-            hash_.append((d) % (2 ** 32))
-            print(hash_)
-        return hash_
+                b = cls.left_rotate((a_temp + f(b_temp, c_temp, d_temp) + X[const_values[i][2]] + const_values[i][1]) % (2 ** 32), const_values[i][3])
+                c = b_temp
+                d = c_temp
+ 
+        hash_ = [a,b,c,d]
+        return [((temp_1 + temp_2) % (2 ** 32)) for temp_1, temp_2 in zip(cls.start_table,hash_)]
     
     @staticmethod
-    def left_rotate(n, d):
-        return (n << d) | (n >> (32 - d))
+    def left_rotate(value, n):
+        return (value << n)  % (2 ** 32) | value >> (32 - n)
     
     def __str__(self) -> str:
-        return ''.join([f'{b:02x}' for b in self.x])
-message = ''
-md4_digest = MD4(message.encode())
+        return MD4(self.x)._hex()
+        
+    def _hex(cls):
+        return "".join(f"{value:02x}" for value in cls._bytes())
+    
+    def _bytes(cls):
+        return struct.pack("<4L", *cls.hash)
+    
+md4_digest = MD4.from_file('C:\\Users\\micha\\OneDrive\\Dokumenty\\projekty-python\\studia\\semestr 2\\programowanie\\projekt\\wiadomosc.txt')
 print(md4_digest)

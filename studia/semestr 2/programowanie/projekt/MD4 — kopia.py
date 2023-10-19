@@ -1,0 +1,116 @@
+import struct
+from typing import List
+
+class MD4():
+    stan_poczatkowy = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476]
+
+    def __init__(self, x: bytes):
+        self.x = x
+        x += b"\x80"
+        x += b"\x00" * (-(len(x) + 8) % 64)
+        x += struct.pack("<Q", len(x) * 8)
+        dopelnienie = x
+        self.get_hash([dopelnienie[i : i + 64] for i in range(0, len(dopelnienie), 64)])
+    
+    @classmethod
+    def from_string(cls, x: str):
+        return cls(x)
+
+    @classmethod
+    def from_file(cls, x):
+        with open(x, mode="rb") as file:
+            file_content = file.read()
+        return cls(file_content)
+        
+    @classmethod
+    def get_hash(cls, chunk) -> List[int]:
+        stale = [
+            ("F", 0x00000000, 0, 0x03), ("F", 0x00000000, 1, 0x07), ("F", 0x00000000, 2, 0x0B), ("F", 0x00000000, 3, 0x13),
+            ("F", 0x00000000, 4, 0x03), ("F", 0x00000000, 5, 0x07), ("F", 0x00000000, 6, 0x0B), ("F", 0x00000000, 7, 0x13),
+            ("F", 0x00000000, 8, 0x03), ("F", 0x00000000, 9, 0x07), ("F", 0x00000000, 10, 0x0B), ("F", 0x00000000, 11, 0x13),
+            ("F", 0x00000000, 12, 0x03), ("F", 0x00000000, 13, 0x07), ("F", 0x00000000, 14, 0x0B), ("F", 0x00000000, 15, 0x13),
+            ("G", 0x5A827999, 0, 0x03), ("G", 0x5A827999, 4, 0x05), ("G", 0x5A827999, 8, 0x09), ("G", 0x5A827999, 12, 0x0D),
+            ("G", 0x5A827999, 1, 0x03), ("G", 0x5A827999, 5, 0x05), ("G", 0x5A827999, 9, 0x09), ("G", 0x5A827999, 13, 0x0D),
+            ("G", 0x5A827999, 2, 0x03), ("G", 0x5A827999, 6, 0x05), ("G", 0x5A827999, 10, 0x09), ("G", 0x5A827999, 14, 0x0D),
+            ("G", 0x5A827999, 3, 0x03), ("G", 0x5A827999, 7, 0x05), ("G", 0x5A827999, 11, 0x09), ("G", 0x5A827999, 15, 0x0D),
+            ("H", 0x6ED9EBA1, 0, 0x03), ("H", 0x6ED9EBA1, 8, 0x09), ("H", 0x6ED9EBA1, 4, 0x0B), ("H", 0x6ED9EBA1, 12, 0x0F),
+            ("H", 0x6ED9EBA1, 2, 0x03), ("H", 0x6ED9EBA1, 10, 0x09), ("H", 0x6ED9EBA1, 6, 0x0B), ("H", 0x6ED9EBA1, 14, 0x0F),
+            ("H", 0x6ED9EBA1, 1, 0x03), ("H", 0x6ED9EBA1, 9, 0x09), ("H", 0x6ED9EBA1, 5, 0x0B), ("H", 0x6ED9EBA1, 13, 0x0F),
+            ("H", 0x6ED9EBA1, 3, 0x03), ("H", 0x6ED9EBA1, 11, 0x09), ("H", 0x6ED9EBA1, 7, 0x0B), ("H", 0x6ED9EBA1, 15, 0x0F)
+        ]
+
+
+        a, b, c, d = cls.stan_poczatkowy
+
+        for i in range(48):
+            if stale[i][0] == "F":
+                f = lambda x, y, z: (x & y) | (~x & z)
+            elif stale[i][0] == "G":
+                f = lambda x, y, z: (x & y) | (x & z) | (y & z)
+            else:
+                f = lambda x, y, z: x ^ y ^ z
+
+            d_temp = d
+            b = cls.left_rotate((a + f(b, c, d) + cls.x[stale[i][2]] + stale[i][1]) % (2 ** 32), stale[i][3])
+            a = d_temp
+            d = c
+            c = b
+
+    def _process(self, chunks):
+        for chunk in chunks:
+            X, h = list(struct.unpack("<16I", chunk)), self.h.copy()
+
+            # Round 1.
+            Xi = [3, 7, 11, 19]
+            for n in range(16):
+                i, j, k, l = map(lambda x: x % 4, range(-n, -n + 4))
+                K, S = n, Xi[n % 4]
+                hn = h[i] + MD4.F(h[j], h[k], h[l]) + X[K]
+                h[i] = MD4.lrot(hn & MD4.mask, S)
+
+            # Round 2.
+            Xi = [3, 5, 9, 13]
+            for n in range(16):
+                i, j, k, l = map(lambda x: x % 4, range(-n, -n + 4))
+                K, S = n % 4 * 4 + n // 4, Xi[n % 4]
+                hn = h[i] + MD4.G(h[j], h[k], h[l]) + X[K] + 0x5A827999
+                h[i] = MD4.lrot(hn & MD4.mask, S)
+
+            # Round 3.
+            Xi = [3, 9, 11, 15]
+            Ki = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
+            for n in range(16):
+                i, j, k, l = map(lambda x: x % 4, range(-n, -n + 4))
+                K, S = Ki[n], Xi[n % 4]
+                hn = h[i] + MD4.H(h[j], h[k], h[l]) + X[K] + 0x6ED9EBA1
+                h[i] = MD4.lrot(hn & MD4.mask, S)
+
+            self.h = [((v + n) & MD4.mask) for v, n in zip(self.h, h)]
+
+    @staticmethod
+    def F(x, y, z):
+        return (x & y) | (~x & z)
+
+    @staticmethod
+    def G(x, y, z):
+        return (x & y) | (x & z) | (y & z)
+
+    @staticmethod
+    def H(x, y, z):
+        return x ^ y ^ z
+
+    @staticmethod
+    def lrot(value, n):
+        lbits, rbits = (value << n) & MD4.mask, value >> (MD4.width - n)
+        return lbits | rbits
+    
+    @staticmethod
+    def left_rotate(n, d):
+        return (n << d) | (n >> (32 - d))
+    
+    def __str__(self) -> str:
+        return ''.join([f'{b:02x}' for b in self.x])
+
+message = "Ala ma kota"
+md4_digest = MD4(message.encode())
+print(md4_digest)

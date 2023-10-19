@@ -13,15 +13,15 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.central_widget)
         self.central_widget.setLayout(self.main_layout)
 
-        self.button1 = QPushButton("Przycisk 1")
+        self.button1 = QPushButton("Zakoduj widomość MD4")
         self.button1.clicked.connect(lambda: self.show_task1_options())
         self.main_layout.addWidget(self.button1)
 
-        self.button2 = QPushButton("Przycisk 2")
+        self.button2 = QPushButton("Utworz klucz")
         self.button2.clicked.connect(lambda: self.task_2())
         self.main_layout.addWidget(self.button2)
 
-        self.button3 = QPushButton("Przycisk 3")
+        self.button3 = QPushButton("Wyswietl klucz")
         self.button3.clicked.connect(lambda: self.task_3())
         self.main_layout.addWidget(self.button3)
 
@@ -31,16 +31,16 @@ class MainWindow(QMainWindow):
 
     def show_task1_options(self):
         options_dialog = QDialog(self)
-        options_dialog.setWindowTitle("Opcje zadania 1")
+        options_dialog.setWindowTitle("Importuj wiadomość z")
         options_layout = QVBoxLayout()
         options_dialog.setLayout(options_layout)
 
-        option1_button = QPushButton("Opcja 1")
-        option1_button.clicked.connect(lambda: self.task_1())
+        option1_button = QPushButton("Wprowadz ręcznie")
+        option1_button.clicked.connect(lambda: self.task_1(""))
         options_layout.addWidget(option1_button)
 
-        option2_button = QPushButton("Opcja 2")
-        option2_button.clicked.connect(lambda: self.task_1())
+        option2_button = QPushButton("Pobierz z pliku")
+        option2_button.clicked.connect(lambda: self.task_1(""))
         options_layout.addWidget(option2_button)
 
         options_dialog.exec_()
