@@ -13,7 +13,7 @@ problem += Al * 50 + Go * 75 + Kl * 100 + AG * 80 + AK * 125 + GK * 150
 problem += Al + Go + Kl + AG + AK + GK <= 20
 problem += Al + AG + AK == 10
 problem += Go + AG + GK == 8
-problem += Kl  + AK + GK == 15
+problem += Kl + AK + GK == 15
 
 
 problem.solve()
