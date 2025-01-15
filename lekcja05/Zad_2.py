@@ -19,7 +19,7 @@ ilosc_przechowywanej_energi = LpVariable.dicts("ilosc_przechowywanej_energi", Mi
 problem += ((ilosc_przechowywanej_energi[miesiac] * 0,1) + (koszt_produkcji[miesiac] * Koszt_produkcji_tabelka[miesiac]) for miesiac in Miesiace)
 
 for i in len(Miesiace):
-    ilosc_przechowywanej_energi[i] 
+    ilosc_przechowywanej_energi[i] >= 0
 
 problem.solve()
 
