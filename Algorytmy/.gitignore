@@ -1,0 +1,19 @@
+# Skompilowane binaria
+*.exe
+*.o
+*.obj
+*.out
+
+# VS Code Code Runner
+tempCodeRunnerFile.*
+
+# Bajtkod Pythona
+__pycache__/
+*.py[cod]
+
+# Visual Studio
+.vs/
+
+# System
+.DS_Store
+Thumbs.db
