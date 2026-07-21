@@ -12,7 +12,12 @@ Skrypty R i raporty PDF z kolejnych zajęć poświęconych metodom Monte Carlo �
 
 | Folder | Zawartość |
 |---|---|
-| `lekcja-01`–`lekcja-05` | Skrypty R, treści zadań i raporty (PDF) z każdej lekcji |
+| `lekcja-01/` | Generator liniowy kongruencyjny liczb losowych (analiza okresu, rozkład 1D/2D) |
+| `lekcja-02/` | Generowanie zmiennych losowych metodą odwrotnej dystrybuanty oraz Boxa-Mullera |
+| `lekcja-03/` | Symulacja mieszanki gaussowskiej i próbkowanie metodą odrzucenia (rejection sampling) |
+| `lekcja-04/` | Próbkowanie istotnościowe (importance sampling) — wersja robocza i finalna, wariancja estymatora |
+| `lekcja-05/` | Moc testu Kołmogorowa-Smirnowa dla różnych parametryzacji rozkładu Beta |
+| *(root)* | `raport_generator_kongruencyjny.Rmd` — raport z lekcji 1; `szablon_raportu_monte_carlo.Rnw` — wielorazowy szablon LaTeX/knitr do raportów |
 
 ## 🛠️ Technologie
 
