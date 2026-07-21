@@ -13,11 +13,12 @@ Baza podstawowych algorytmów tworzonych w ramach nauki algorytmiki (technikum /
 
 | Folder | Zawartość |
 |---|---|
-| `podstawowe-algorytmy/` | Klasyczne algorytmy: silnia, NWD, NWW, liczby pierwsze, palindromy, ciągi, rozkład na czynniki pierwsze |
-| `Algorytmika_AI/` | Zadania z algorytmiki i podstaw AI: hetmany (backtracking), kółko i krzyżyk, pseudokod |
-| `odczyt-zapis-plikow/` | Obsługa plików (odczyt/zapis) w C++ i Pythonie |
-| `pprog/` | Programowanie proceduralne w C++ |
-| `pomoc/` | Pomocnicze skrypty testowe |
+| `podstawowe-algorytmy/` | Klasyczne algorytmy: silnia, NWD, NWW, liczby pierwsze, palindromy, ciągi (w tym Fibonacciego — iteracyjnie i tablicowo), rozkład na czynniki pierwsze, rysowanie siatek |
+| `Algorytmika_AI/` | Zadania z algorytmiki i podstaw AI: hetmany (backtracking), Cztery w rzędzie, generowanie permutacji losowych, zagadka sumy i iloczynu |
+| `odczyt-zapis-plikow/` | Obsługa plików (odczyt/zapis) w C++ i Pythonie: wyszukiwanie liczb pierwszych/palindromicznych/automorficznych, sumy i wielokrotności, filtrowanie wg zakresu |
+| `pprog/` | Programowanie proceduralne w C++: baza książek i wypożyczalnia, porównywanie macierzy, wskaźniki, metoda bisekcji, pole wielokąta |
+| `pomoc/` | Pomocnicze skrypty testowe (wskaźniki, przedziały, warunek trójkąta) |
+| `zapis/` | Zliczanie liczb złożonych, przykłady klas i wskaźnika `this` |
 
 ## 🛠️ Technologie
 
