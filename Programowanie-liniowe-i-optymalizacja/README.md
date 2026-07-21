@@ -1,0 +1,2 @@
+# Programowanie liniowe i optymalizacja
+ 
