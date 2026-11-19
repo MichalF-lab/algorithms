@@ -14,7 +14,7 @@ Baza podstawowych algorytmów tworzonych w ramach nauki algorytmiki (technikum /
 | Folder | Zawartość |
 |---|---|
 | `podstawowe-algorytmy/` | Klasyczne algorytmy: silnia, NWD, NWW, liczby pierwsze, palindromy, ciągi (w tym Fibonacciego — iteracyjnie i tablicowo), rozkład na czynniki pierwsze, rysowanie siatek |
-| `Algorytmika_AI/` | Zadania z algorytmiki i podstaw AI: hetmany (backtracking), Cztery w rzędzie, generowanie permutacji losowych, zagadka sumy i iloczynu |
+| `Algorytmika_AI/` | Zadania z algorytmiki i podstaw AI: hetmany (backtracking), Cztery w rzędzie, generowanie permutacji losowych, zagadka sumy i iloczynu oraz notatnik seminaryjny `seminarium_sztuczna_inteligencja.ipynb` (CNF/DNF i skolemizacja, SAT vs wynikanie, rezolucja i forward/backward chaining, A*, CSP z eksperymentem n hetmanów) |
 | `odczyt-zapis-plikow/` | Obsługa plików (odczyt/zapis) w C++ i Pythonie: wyszukiwanie liczb pierwszych/palindromicznych/automorficznych, sumy i wielokrotności, filtrowanie wg zakresu |
 | `pprog/` | Programowanie proceduralne w C++: baza książek i wypożyczalnia, porównywanie macierzy, wskaźniki, metoda bisekcji, pole wielokąta |
 | `pomoc/` | Pomocnicze skrypty testowe (wskaźniki, przedziały, warunek trójkąta) |
@@ -26,6 +26,7 @@ Baza podstawowych algorytmów tworzonych w ramach nauki algorytmiki (technikum /
 |---|---|
 | C++17 | kompilator MinGW-w64 g++, konfiguracja w `.vscode/` |
 | Python | 3.7 (interpreter wskazany w `.vscode/settings.json`) |
+| Jupyter | notatnik seminaryjny z AI (matplotlib do wykresów) |
 
 ## 👤 Autor
 

@@ -14,7 +14,7 @@ Repozytorium łączy pięć projektów z zakresu algorytmiki, struktur danych i 
 
 | Folder | Zawartość |
 |---|---|
-| [`Algorytmy/`](./Algorytmy) | Podstawowe algorytmy w C++/Pythonie: matematyka dyskretna, obsługa plików, backtracking |
+| [`Algorytmy/`](./Algorytmy) | Podstawowe algorytmy w C++/Pythonie: matematyka dyskretna, obsługa plików, backtracking, notatnik seminaryjny z AI (logika, A*, CSP) |
 | [`Algorytmy-i-struktury-danych/`](./Algorytmy-i-struktury-danych) | Sortowanie, kopce, programowanie dynamiczne (LCS, cięcie prętów), bucket sort |
 | [`Programowanie-liniowe-i-optymalizacja/`](./Programowanie-liniowe-i-optymalizacja) | Modele programowania liniowego (PuLP, lpSolve): problemy transportowe, zagadnienia dualne |
 | [`Monte-Carlo-Methods/`](./Monte-Carlo-Methods) | Metody Monte Carlo: generatory liczb losowych, próbkowanie istotnościowe, symulacje |
